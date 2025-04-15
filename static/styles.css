@@ -80,3 +80,30 @@ button:hover {
 .initiative p {
     margin: 5px 0;
 }
+.header-logo {
+    text-align: left;
+    padding: 10px;
+}
+
+.header-logo img {
+    height: 50px;
+}
+
+.footer-note {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 14px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 4px 10px;
+    border-radius: 5px;
+}
+
+.developer-name {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+    color: #444;
+}
