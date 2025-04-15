@@ -39,16 +39,14 @@ def load_initiatives():
 # Load the CSV file and convert it to JSON with embeddings
 def load_csv_to_json(csv_file='CampfireData.csv'):
     initiatives = []
-    with open(csv_file, 'r', encoding='utf-8') as file:
+    with open(csv_file, 'r', encoding='utf-8-sig') as file:  # Use 'utf-8-sig' encoding to handle BOM
         reader = csv.DictReader(file)
-        fieldnames = [field.strip().lstrip('\ufeff') for field in reader.fieldnames]
-        print("Normalized headers:", fieldnames)
-        reader.fieldnames = fieldnames  # Replace old headers
+        print("CSV Headers:", reader.fieldnames)
         for row in reader:
             initiative = {
                 "title": row.get("Title", "").strip(),
                 "owner": row.get("Owner", "").strip(),
-                "campfire_id": row.get("Id", "").strip(),
+                "campfire_id": row.get("Campfire_Id", "").strip(),
                 "description": row.get("Description", "").strip(),
                 "link": row.get("Link", "").strip(),
                 "maturity": row.get("Maturity Level", "").strip(),
