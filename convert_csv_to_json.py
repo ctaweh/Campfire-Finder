@@ -66,4 +66,4 @@ def convert_csv_to_json():
     save_to_json(initiatives)  # Save initiatives as JSON
 
 # Run the conversion
-convert_csv_to_json()
+#convert_csv_to_json()
