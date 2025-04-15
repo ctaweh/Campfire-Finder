@@ -31,7 +31,7 @@ def load_initiatives():
             print("Loaded initiatives:", initiatives)  # Debug log
             return initiatives
     except Exception as e:
-        logger.error(f"Error loading initiatives: {e}")
+        print(f"Error loading initiatives: {e}")
         return []
 
 # Load the CSV file and convert it to JSON with embeddings
