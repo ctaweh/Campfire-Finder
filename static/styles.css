@@ -1,0 +1,82 @@
+/* styles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    color: #333;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    line-height: 1.6;
+}
+
+h1 {
+    color: #d40511; /* DHL red */
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #d40511;
+    margin-top: 40px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    resize: vertical;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #ffcc00; /* DHL yellow */
+    color: #000;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e6b800;
+}
+
+.loading {
+    margin-top: 15px;
+    color: #d40511;
+    font-weight: bold;
+}
+
+.error {
+    color: #d40511;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.results {
+    margin-top: 30px;
+}
+
+.initiative {
+    background-color: #f9f9f9;
+    border-left: 6px solid #ffcc00;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.initiative h3 {
+    margin-top: 0;
+    color: #d40511;
+}
+
+.initiative p {
+    margin: 5px 0;
+}
