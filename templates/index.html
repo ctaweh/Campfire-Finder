@@ -1,0 +1,96 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initiative Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <h1>Initiative Finder</h1>
+    <p>Enter a description to find similar initiatives:</p>
+
+    <form id="searchForm">
+        <textarea id="descriptionInput" placeholder="Enter your initiative description here..."></textarea>
+        <button type="submit">Find Similar Initiatives</button>
+    </form>
+
+    <div class="loading" id="loadingIndicator">Searching for similar initiatives...</div>
+    <div class="error" id="errorMessage"></div>
+
+    <div class="results" id="resultsContainer"></div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const description = document.getElementById('descriptionInput').value.trim();
+            if (!description) {
+                document.getElementById('errorMessage').textContent = 'Please enter a description.';
+                return;
+            }
+
+            document.getElementById('errorMessage').textContent = '';
+            document.getElementById('loadingIndicator').style.display = 'block';
+            document.getElementById('resultsContainer').innerHTML = '';
+
+            const formData = new FormData();
+            formData.append('description', description);
+
+            fetch('/search', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Something went wrong with the search.');
+                }
+                return response.json();
+            })
+            .then(data => {
+    document.getElementById('loadingIndicator').style.display = 'none';
+
+    if (data.length === 0) {
+        document.getElementById('resultsContainer').innerHTML = '<p>No similar initiatives found.</p>';
+        return;
+    }
+
+    // Filter results to only show those with similarity greater than 80%
+    const filteredResults = data.filter(initiative => initiative.similarity * 100 > 80);
+
+    if (filteredResults.length === 0) {
+        document.getElementById('resultsContainer').innerHTML = '<p>No initiatives found with more than 80% similarity.</p>';
+        return;
+    }
+
+    let resultsHTML = '<h2>Similar Initiatives (above 80% similarity)</h2>';
+
+filteredResults.forEach(initiative => {
+    resultsHTML += `
+        <div class="initiative">
+            <h3>${initiative.title}</h3>
+            <p><strong>Owner:</strong> ${initiative.owner}</p>
+            <p><strong>Campfire ID:</strong> ${initiative.campfire_id}</p>
+            <p><strong>Similarity Score:</strong> ${(initiative.similarity * 100).toFixed(2)}%</p>
+            <p><strong>Maturity Level:</strong> ${initiative.maturity || 'N/A'}</p>
+            <p><strong>Link:</strong>
+                <a href="${initiative.link}" target="_blank">${initiative.link}</a>
+            </p>
+        </div>
+    `;
+});
+
+    document.getElementById('resultsContainer').innerHTML = resultsHTML;
+})
+
+            .catch(error => {
+                document.getElementById('loadingIndicator').style.display = 'none';
+                document.getElementById('errorMessage').textContent = error.message;
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
