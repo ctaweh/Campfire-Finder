@@ -38,8 +38,8 @@ def load_initiatives():
 
 # Load the CSV file and convert it to JSON with embeddings
 def load_csv_to_json(csv_file='CampfireData.csv'):
-    initiatives = []
-    with open(csv_file, 'r', encoding='utf-8') as file:
+        initiatives = []
+    with open(csv_file, 'r', encoding='utf-8-sig') as file:  # Use 'utf-8-sig' encoding to handle BOM
         reader = csv.DictReader(file)
         for row in reader:
             initiative = {
