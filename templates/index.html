@@ -9,6 +9,9 @@
 
 </head>
 <body>
+<div class="header-logo">
+    <img src="{{ url_for('static', filename='dhl-logo.png') }}" alt="DHL Logo" />
+</div>
     <h1>Initiative Finder</h1>
     <p>Enter a description to find similar initiatives:</p>
 
@@ -21,6 +24,10 @@
     <div class="error" id="errorMessage"></div>
 
     <div class="results" id="resultsContainer"></div>
+    <div class="footer-note">
+    <i class="fas fa-lightbulb"></i>
+    PoC Developed by<br> EU BIT Digitalization Team
+    </div>
 
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(e) {
@@ -75,12 +82,12 @@ filteredResults.forEach(initiative => {
             <p><strong>Campfire ID:</strong> ${initiative.campfire_id}</p>
             <p><strong>Similarity Score:</strong> ${(initiative.similarity * 100).toFixed(2)}%</p>
             <p><strong>Maturity Level:</strong> ${initiative.maturity || 'N/A'}</p>
-            <p><strong>Link:</strong>
-                <a href="${initiative.link}" target="_blank">${initiative.link}</a>
-            </p>
+            <p><strong>Reason:</strong> ${initiative.reason}</p>
+            <a href="${initiative.link}" target="_blank">View Initiative</a>
         </div>
     `;
 });
+
 
     document.getElementById('resultsContainer').innerHTML = resultsHTML;
 })
