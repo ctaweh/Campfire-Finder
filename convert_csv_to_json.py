@@ -41,6 +41,9 @@ def load_csv_to_json(csv_file='CampfireData.csv'):
     initiatives = []
     with open(csv_file, 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
+        fieldnames = [field.strip().lstrip('\ufeff') for field in reader.fieldnames]
+        print("Normalized headers:", fieldnames)
+        reader.fieldnames = fieldnames  # Replace old headers
         for row in reader:
             initiative = {
                 "title": row.get("Title", "").strip(),
